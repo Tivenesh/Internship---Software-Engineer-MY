@@ -1,39 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tables Display</title>
-    <style>
-        table {
-            width: 50%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: center;
-        }
-    </style>
+    <title>Upload Table</title>
 </head>
 <body>
-    <h2>Table 1</h2>
-    <table>
-        <tr><th>Index #</th><th>Value</th></tr>
-        <tr th:each="entry : ${table1}">
-            <td th:text="${entry.index}"></td>
-            <td th:text="${entry.value}"></td>
+    <h2>Upload Table File</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2 th:if="${tableData}">Table 1 (Uploaded Data)</h2>
+    <table border="1" th:if="${tableData}">
+        <tr th:each="row : ${tableData}">
+            <td th:text="${row.column1}"></td>
+            <td th:text="${row.column2}"></td>
         </tr>
     </table>
 
-    <h2>Table 2 (Processed Data)</h2>
-    <table>
-        <tr><th>Category</th><th>Value</th></tr>
-        <tr th:each="entry : ${table2}">
-            <td th:text="${entry.index}"></td>
-            <td th:text="${entry.value}"></td>
-        </tr>
-    </table>
+    <form action="/process" method="post" th:if="${showProcessButton}">
+        <button type="submit">Process</button>
+    </form>
+
+    <p th:if="${message}" th:text="${message}" style="color: red;"></p>
 </body>
 </html>

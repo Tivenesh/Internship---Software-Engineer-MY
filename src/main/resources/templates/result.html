@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Table Results</title>
+</head>
+<body>
+    <h2>Table 1 (Uploaded Data)</h2>
+    <table border="1">
+        <tr th:each="row : ${tableData}">
+            <td th:text="${row.column1}"></td>
+            <td th:text="${row.column2}"></td>
+        </tr>
+    </table>
+
+    <h2>Table 2 (Processed Data)</h2>
+    <table border="1">
+        <tr>
+            <th>Category</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Alpha</td>
+            <td th:text="${alpha}"></td>
+        </tr>
+        <tr>
+            <td>Beta</td>
+            <td th:text="${beta}"></td>
+        </tr>
+        <tr>
+            <td>Charlie</td>
+            <td th:text="${charlie}"></td>
+        </tr>
+    </table>
+
+    <br>
+    <a href="/">Upload Another File</a>
+</body>
+</html>
